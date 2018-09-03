@@ -1,19 +1,20 @@
-// FIXME: the book seems to treat `plays` as global scope but shows it as an arg of statement()
-// as a workaround - make it an import for now
+// FIXME: the book seems to treat `invoice` & `plays` as global scope
+// but shows them as args of statement()
+// use `require` as workaround
+const invoice = require('./invoices')[0];
 const plays = require('./plays');
 
 function statement (invoice, plays) {
   let totalAmount = 0;
-  let volumeCredits = 0;
   let result = `Statement for ${invoice.customer}\n`;
-  for (let perf of invoice.performances) {
-
-    volumeCredits += volumeCreditsFor(perf);
+  for (const perf of invoice.performances) {
 
     //print line for this order
     result += `  ${playFor(perf).name}: ${usd(amountFor(perf))} (${perf.audience} seats)\n`;
     totalAmount += amountFor(perf);
   }
+
+  const volumeCredits = totalVolumeCredits();
   result += `Amount owed is ${usd(totalAmount)}\n`;
   result += `You earned ${volumeCredits} credits\n`;
   return result;
@@ -30,6 +31,14 @@ function volumeCreditsFor(aPerformance) {
   result += Math.max(aPerformance.audience - 30, 0);
   if ("comedy" === playFor(aPerformance).type) result += Math.floor(aPerformance.audience / 5);
   return result;
+}
+
+function totalVolumeCredits() {
+  let volumeCredits = 0;
+  for (const perf of invoice.performances) {
+    volumeCredits += volumeCreditsFor(perf);
+  }
+  return volumeCredits;
 }
 
 function playFor(aPerforamance) {
