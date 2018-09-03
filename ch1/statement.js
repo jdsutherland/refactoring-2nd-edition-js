@@ -5,13 +5,16 @@ const invoice = require('./invoices')[0];
 const plays = require('./plays');
 
 function statement (invoice, plays) {
-  return renderPlainText (invoice, plays);
+  const statementData = {};
+  statementData.customer = invoice.customer;
+  statementData.performances = invoice.performances;
+  return renderPlainText (statementData, plays);
 }
 
-function renderPlainText (invoice, plays) {
+function renderPlainText (data, plays) {
   let totalAmount = 0;
-  let result = `Statement for ${invoice.customer}\n`;
-  for (const perf of invoice.performances) {
+  let result = `Statement for ${data.customer}\n`;
+  for (const perf of data.performances) {
 
     //print line for this order
     result += `  ${playFor(perf).name}: ${usd(amountFor(perf))} (${perf.audience} seats)\n`;
@@ -37,7 +40,7 @@ function renderPlainText (invoice, plays) {
 
   function totalVolumeCredits() {
     let volumeCredits = 0;
-    for (const perf of invoice.performances) {
+    for (const perf of data.performances) {
       volumeCredits += volumeCreditsFor(perf);
     }
     return volumeCredits;
