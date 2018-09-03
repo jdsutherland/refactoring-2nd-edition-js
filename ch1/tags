@@ -1,0 +1,42 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	0.0.0	/7fcdea3/
+0	invoices.json	/^      {$/;"	o	array:0.performances
+0	invoices.json	/^  {$/;"	o
+1	invoices.json	/^      {$/;"	o	array:0.performances
+2	invoices.json	/^      {$/;"	o	array:0.performances
+SessionLoad	Session.vim	/^let SessionLoad = 1$/;"	v
+as-like	plays.json	/^  "as-like": {$/;"	o
+audience	invoices.json	/^        "audience": 35$/;"	n	object:0.performances.1
+audience	invoices.json	/^        "audience": 40$/;"	n	object:0.performances.2
+audience	invoices.json	/^        "audience": 55$/;"	n	object:0.performances.0
+customer	invoices.json	/^    "customer": "BigCo",$/;"	s	object:0
+g:this_obsession	Session.vim	/^let g:this_obsession = v:this_session$/;"	v
+g:this_obsession_status	Session.vim	/^let g:this_obsession_status = 2$/;"	v
+g:this_session	Session.vim	/^let g:this_session = v:this_session$/;"	v
+hamlet	plays.json	/^  "hamlet": {$/;"	o
+invoice	statement.js	/^const invoice = require('.\/invoices');$/;"	C
+name	plays.json	/^    "name": "As You Like It",$/;"	s	object:as-like
+name	plays.json	/^    "name": "Hamlet",$/;"	s	object:hamlet
+name	plays.json	/^    "name": "Othello",$/;"	s	object:othello
+othello	plays.json	/^  "othello": {$/;"	o
+performances	invoices.json	/^    "performances": [$/;"	a	object:0
+playID	invoices.json	/^        "playID": "as-like",$/;"	s	object:0.performances.1
+playID	invoices.json	/^        "playID": "hamlet",$/;"	s	object:0.performances.0
+playID	invoices.json	/^        "playID": "othello",$/;"	s	object:0.performances.2
+plays	statement.js	/^const plays = require('.\/plays');$/;"	C
+s:l	Session.vim	/^let s:l = 19 - ((13 * winheight(0) + 9) \/ 19)$/;"	v
+s:l	Session.vim	/^let s:l = 3 - ((1 * winheight(0) + 10) \/ 20)$/;"	v
+s:l	Session.vim	/^let s:l = 45 - ((29 * winheight(0) + 20) \/ 40)$/;"	v
+s:l	Session.vim	/^let s:l = 64 - ((11 * winheight(0) + 20) \/ 40)$/;"	v
+s:so_save	Session.vim	/^let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0$/;"	v
+s:sx	Session.vim	/^let s:sx = expand("<sfile>:p:r")."x.vim"$/;"	v
+s:wipebuf	Session.vim	/^  let s:wipebuf = bufnr('%')$/;"	v
+statement	statement.js	/^function statement (invoice, plays) {$/;"	f
+type	plays.json	/^    "type": "comedy"$/;"	s	object:as-like
+type	plays.json	/^    "type": "tragedy"$/;"	s	object:hamlet
+type	plays.json	/^    "type": "tragedy"$/;"	s	object:othello
