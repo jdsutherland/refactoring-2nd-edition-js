@@ -10,15 +10,15 @@ function statement (invoice, plays) {
   statementData.performances = invoice.performances.map(enrichPerformance);
   return renderPlainText (statementData, plays);
 
-  function enrichPerformance(aPerforamance) {
-    const result = Object.assign({}, aPerforamance);
+  function enrichPerformance(aPerformance) {
+    const result = Object.assign({}, aPerformance);
     result.play = playFor(result);
     result.amount = amountFor(result);
     return result;
   }
 
-  function playFor(aPerforamance) {
-    return plays[aPerforamance.playID];
+  function playFor(aPerformance) {
+    return plays[aPerformance.playID];
   }
 
   function amountFor(aPerformance) {
