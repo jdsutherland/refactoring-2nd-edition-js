@@ -1,8 +1,3 @@
-// FIXME: the book seems to treat `invoice` & `plays` as global scope
-// but shows them as args of statement()
-// use `require` as workaround
-const invoice = require('./invoices')[0];
-const plays = require('./plays');
 const createStatementData = require('./createStatementData');
 
 function statement(invoice, plays) {
