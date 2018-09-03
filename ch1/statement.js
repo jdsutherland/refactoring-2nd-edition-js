@@ -44,5 +44,4 @@ function statement (invoice, plays) {
 const invoice = require('./invoices');
 const plays = require('./plays');
 
-const result = statement(invoice[0], plays);
-console.log("result", result);
+module.exports = statement;
