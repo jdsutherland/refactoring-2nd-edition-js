@@ -11,12 +11,12 @@ function enrichReading(original) {
   // lodash cloneDeep
   const result = _.cloneDeep(original);
   result.baseCharge = calculateBaseCharge(result);
+  result.taxableCharge = Math.max(0, base - taxThreshold(result.year));
   return result;
 }
 
 const rawReading = acquireReading();
 const aReading = enrichReading(rawReading);
-const basicChargeAmount = aReading.baseCharge;
 
 it('check reading unchanged', function() {
   const baseReading = {
