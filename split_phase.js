@@ -13,12 +13,15 @@ function priceOrder(product, quantity, shippingMethod) {
 // then
 
 function priceOrder(product, quantity, shippingMethod) {
+  const priceData = {basePrice: basePrice quantity: quantity, discount: discount};
+  return applyShipping(priceData, shippingMethod);
+}
+
+function calculatePricingData(product, quantity) {
   const basePrice = product.basePrice * quantity;
   const discount = Math.max(quantity - product.discountThreshold, 0) *
                    product.basePrice * product.discountRate;
-  const priceData = {basePrice: basePrice quantity: quantity, discount: discount};
-  const price = applyShipping(priceData, shippingMethod);
-  return price;
+  return {basePrice: basePrice, quantity: quantity, discount:discount};
 }
 
 function applyShipping(priceData, shippingMethod) {
@@ -26,5 +29,5 @@ function applyShipping(priceData, shippingMethod) {
                               ? shippingMethod.discountedFee
                               : shippingMethod.feePerCase;
   const shippingCost = priceData.quantity * shippingPerCase;
-  const price = priceData.basePrice - priceData.discount + shippingCost;
+  return priceData.basePrice - priceData.discount + shippingCost;
 }
