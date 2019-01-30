@@ -37,3 +37,7 @@ class Reading {
 const rawReading = acquireReading();
 const aReading = new Reading(rawReading);
 const basicChargeAmount = aReading.baseCharge;
+
+const taxableCharge = Math.max(
+  0, aReading.baseCharge - taxThreshold(aReading.year)
+);
