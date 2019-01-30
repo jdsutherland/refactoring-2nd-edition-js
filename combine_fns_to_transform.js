@@ -16,4 +16,15 @@ function enrichReading(original) {
 
 const rawReading = acquireReading();
 const aReading = enrichReading(rawReading);
-const basicChargeAmount = aReading.baseCharge
+const basicChargeAmount = aReading.baseCharge;
+
+it('check reading unchanged', function() {
+  const baseReading = {
+    customer : "ivan",
+    quantity : 15,
+    month : 5,
+    year : 2011}
+  const oracle = _.cloneDeep(baseReading);
+  enrichReading(baseReading);
+  assert.deepEqual(baseReading, oracle);
+});
