@@ -47,6 +47,11 @@ aCustomer.billingPlan = newPlan;
 // client 4
 const weeksDelinquent = aCustomer.paymentHistory.weeksDelinquentInLastYear;
 
+// client 5
+const name = ! isUnknown(aCustomer) ? aCustomer.name : "unknown occupant";
+// change to
+const name = aCustomer.isUnknown ? "unknown occupant" : aCustomer.name;
+
 // Looking through the code base, I see many clients of the site object that have to deal with an unknown customer.
 // Most of them do the same thing when they get one: They use “occupant” as the name, give them a basic billing plan, and class them as zero-weeks delinquent.
 // This widespread testing for a special case, plus a common response, is what tells me it’s time for a Special Case Object.
