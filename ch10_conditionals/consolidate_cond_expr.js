@@ -1,5 +1,11 @@
 function disabilityAmount(anEmployee) {
-  if ((anEmployee.seniority < 2)
-      || (anEmployee.monthsDisabled > 12)
-      || (anEmployee.isPartTime)) return 0;
+  if (isNotEligableForDisability())
+    return 0;
   // compute the disability amount
+}
+
+function isNotEligableForDisability() {
+  return ((anEmployee.seniority < 2)
+    || (anEmployee.monthsDisabled > 12)
+    || (anEmployee.isPartTime));
+}
