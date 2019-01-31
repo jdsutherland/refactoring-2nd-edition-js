@@ -37,13 +37,13 @@ class Rating {
 
     if (this.voyage.zone === "china") result += 1;
     if (this.voyage.zone === "east-indies") result += 1;
+    result += this.historyLengthFactor;
     result += voyageAndHistoryLengthFactor;
     return result;
   }
 
   get voyageAndHistoryLengthFactor() {
     let result = 0;
-    result += this.historyLengthFactor;
     if (this.voyage.length > 14) result -= 1;
     return result;
   }
@@ -66,7 +66,6 @@ class ExperiencedChinaRating extends Rating {
   get voyageAndHistoryLengthFactor() {
     let result = 0;
     result += 3;
-    result += this.historyLengthFactor;
     if (this.voyage.length > 12) result += 1;
     if (this.voyage.length > 18) result -= 1;
     return result;
