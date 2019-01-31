@@ -1,11 +1,24 @@
 // A utility company installs its services in sites.
 class Site {
-  get customer() {return this._customer;}
+  get customer() {
+    return (this._customer === "unknown") ? new UnknownCustomer() : this._customer;
+  }
 
   // get name()           {...}
   // get billingPlan()    {...}
   // set billingPlan(arg) {...}
   // get paymentHistory() {...}
+  get isUnknown() {return false;}
+}
+
+class UnknownCustomer {
+  get isUnknown() {return true;}
+}
+
+function isUnknown(arg) {
+  if (!(arg instanceof Customer || arg instanceof UnknownCustomer))
+    throw new Error(`investigate bad value: <${arg}>`);
+  return arg.isUnknown;
 }
 
 // Most of the time, a site has a customer, but sometimes there isn’t one.
@@ -19,16 +32,16 @@ class Site {
 const aCustomer = site.customer;
 // ... lots of intervening code ...
 let customerName;
-if (aCustomer === "unknown") customerName = "occupant";
+if (isUnknown(aCustomer) customerName = "occupant";
 else customerName = aCustomer.name;
 // client 2
-const plan = (aCustomer === "unknown") ?
+const plan = (isUnknown(aCustomer) ?
       registry.billingPlans.basic
       : aCustomer.billingPlan;
 // client 3
-if (aCustomer !== "unknown") aCustomer.billingPlan = newPlan;
+if (!isUnknown(aCustomer)) aCustomer.billingPlan = newPlan;
 // client 4
-const weeksDelinquent = (aCustomer === "unknown") ?
+const weeksDelinquent = (isUnknown(aCustomer) ?
       0
       : aCustomer.paymentHistory.weeksDelinquentInLastYear;
 
