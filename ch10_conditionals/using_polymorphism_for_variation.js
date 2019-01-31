@@ -4,7 +4,7 @@
 // The rating agency gives out either an “A” or “B” rating, depending of various factors due to risk and profit potential. The risk comes from assessing the nature of the voyage as well as the history of the captain’s prior voyages.
 
 function rating(voyage, history) {
-  return new Rating(voyage, history).value;
+  return createRating(voyage, history).value;
 }
 
 class Rating {
@@ -53,6 +53,15 @@ class Rating {
   get hasChinaHistory() {
     return this.history.some(v => "china" === v.zone);
   }
+}
+
+class ExperiencedChinaRating extends Rating {
+}
+
+function createRating(voyage, history) {
+  if (voyage.zone === "china" && history.some(v => "china" === v.zone))
+    return new ExperiencedChinaRating(voyage, history);
+  else return new Rating(voyage, history);
 }
 
 // ex caller
