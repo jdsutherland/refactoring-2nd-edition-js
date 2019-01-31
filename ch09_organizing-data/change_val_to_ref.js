@@ -2,7 +2,8 @@
 class Order {
   constructor(data) {
     this._number = data.number;
-    this._customer = new Customer(data.customer);
+    // coupled to global Repository -- can inject via constructor if desired
+    this._customer = registerCustomer(data.customer);
     // load other data
   }
   get customer() {return this._customer;}
@@ -22,3 +23,20 @@ class Customer {
 
 // This problem is particularly awkward if the customer object is mutable, which can lead to inconsistencies between the customer objects.
 
+// If I want to use the same customer object each time, I’ll need a place to store it.
+// Exactly where to store entities like this will vary from application to application, but for a simple case I like to use a repository object.
+let _repositoryData;
+
+export function initialize() {
+  _repositoryData = {};
+  _repositoryData.customers = new Map();
+}
+
+export function registerCustomer(id) {
+  if (! _repositoryData.customers.has(id))
+    _repositoryData.customers.set(id, new Customer(id));
+  return findCustomer(id);
+}
+
+export function findCustomer(id) {
+  return _repositoryData.customers.get(id);
