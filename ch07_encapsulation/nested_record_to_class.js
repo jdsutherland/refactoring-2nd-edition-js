@@ -45,8 +45,20 @@ class CustomerData {
   constructor(data) {
     this._data = data
   }
+
+  getRawData() {
+    return _.cloneDeep(this._data)
+  }
+
+  setUsage(id, year, month, amount) {
+    this._data[customerID].usages[year][month] = amount
+  }
 }
 
 function getCustomerData() { return customerData; }
 function getRawDataOfCustomers() { return customerData._data; }
 function setRawDataOfCustomers(arg) { return customerData = new CustomerData(arg); }
+
+getRawDataOfCustomers()[customerID].usages[year][month] = amount
+
+getCustomerData().setUsage(customerID, year, month, amount)
