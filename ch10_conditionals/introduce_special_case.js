@@ -55,3 +55,6 @@ const name = aCustomer.isUnknown ? "unknown occupant" : aCustomer.name;
 // Looking through the code base, I see many clients of the site object that have to deal with an unknown customer.
 // Most of them do the same thing when they get one: They use “occupant” as the name, give them a basic billing plan, and class them as zero-weeks delinquent.
 // This widespread testing for a special case, plus a common response, is what tells me it’s time for a Special Case Object.
+
+// Creating a class like this is a fair bit of work for what is really a simple value. But for the example I gave, I had to make the class since the customer could be updated.
+// If, however, I only read the data structure, I can use a literal object instead.
