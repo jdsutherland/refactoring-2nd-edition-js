@@ -16,6 +16,11 @@ class UnknownCustomer {
   get name() {return "occupant";}
   get billingPlan()    {return registry.billingPlans.basic;}
   set billingPlan(arg) { /* ignore */ }
+  get paymentHistory() {return new NullPaymentHistory();}
+}
+
+class NullPaymentHistory {
+  get weeksDelinquentInLastYear() {return 0;}
 }
 
 function isUnknown(arg) {
@@ -40,9 +45,7 @@ const plan = aCustomer.billingPlan;
 // client 3
 aCustomer.billingPlan = newPlan;
 // client 4
-const weeksDelinquent = (isUnknown(aCustomer) ?
-      0
-      : aCustomer.paymentHistory.weeksDelinquentInLastYear;
+const weeksDelinquent = aCustomer.paymentHistory.weeksDelinquentInLastYear;
 
 // Looking through the code base, I see many clients of the site object that have to deal with an unknown customer.
 // Most of them do the same thing when they get one: They use “occupant” as the name, give them a basic billing plan, and class them as zero-weeks delinquent.
