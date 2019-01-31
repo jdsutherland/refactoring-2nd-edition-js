@@ -17,7 +17,9 @@ class Shipment {
   set trackingInformation(aTrackingInformation) {
     this._trackingInformation = aTrackingInformation;
   }
+
+  set shippingCompany(arg) { this._trackingInformation.shippingCompany = arg; }
 }
 
 // ex client
-aShipment.trackingInformation.shippingCompany = request.vendor;
+aShipment.shippingCompany = request.vendor;
