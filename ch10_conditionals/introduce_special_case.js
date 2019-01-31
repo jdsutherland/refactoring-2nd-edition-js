@@ -13,6 +13,9 @@ class Site {
 
 class UnknownCustomer {
   get isUnknown() {return true;}
+  get name() {return "occupant";}
+  get billingPlan()    {return registry.billingPlans.basic;}
+  set billingPlan(arg) { /* ignore */ }
 }
 
 function isUnknown(arg) {
@@ -31,15 +34,11 @@ function isUnknown(arg) {
 // client 1
 const aCustomer = site.customer;
 // ... lots of intervening code ...
-let customerName;
-if (isUnknown(aCustomer) customerName = "occupant";
-else customerName = aCustomer.name;
+const customerName = aCustomer.name;
 // client 2
-const plan = (isUnknown(aCustomer) ?
-      registry.billingPlans.basic
-      : aCustomer.billingPlan;
+const plan = aCustomer.billingPlan;
 // client 3
-if (!isUnknown(aCustomer)) aCustomer.billingPlan = newPlan;
+aCustomer.billingPlan = newPlan;
 // client 4
 const weeksDelinquent = (isUnknown(aCustomer) ?
       0
