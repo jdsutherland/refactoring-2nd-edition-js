@@ -40,3 +40,13 @@ function compareUsage (customerID, laterYear, month) {
   const earlier = getRawDataOfCustomers()[customerID].usages[laterYear - 1][month];
   return {laterAmount: later, change: later - earlier};
 }
+
+class CustomerData {
+  constructor(data) {
+    this._data = data
+  }
+}
+
+function getCustomerData() { return customerData; }
+function getRawDataOfCustomers() { return customerData._data; }
+function setRawDataOfCustomers(arg) { return customerData = new CustomerData(arg); }
