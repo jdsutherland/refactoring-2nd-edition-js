@@ -35,4 +35,15 @@ class Employee {
   get type() {return this._type;}
   toString() {return `${this.name} (${this.type})`;}
 }
+
+class Engineer extends Employee {
+  get type() {return "engineer";}
+}
+
+function createEmployee(name, type) {
+  switch (type) {
+    case "engineer": return new Engineer(name, type);
+  }
+  return new Employee(name, type);
+}
 ```
