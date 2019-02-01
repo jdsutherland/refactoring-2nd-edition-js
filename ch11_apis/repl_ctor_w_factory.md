@@ -22,12 +22,16 @@ class Employee {
 }
 
 candidate = createEmployee(document.name, document.empType);
-const leadEngineer = createEmployee(document.leadEngineer, 'E');
+const leadEngineer = createEngineer(document.leadEngineer, 'E');
 ```
 
 ## 1. Create a Factory fn
 ```javascript
 function createEmployee(name, typeCode) {
   return new Employee(name, typeCode);
+}
+
+function createEngineer(name) {
+  return new Employee(name, 'E');
 }
 ```
