@@ -46,3 +46,30 @@ function regularDeliveryDate(anOrder) {
 const isRush = determineIfRush(anOrder);
 aShipment.deliveryDate = deliveryDate(anOrder, isRush);
 // then I’d have no problem with deliveryDate’s signature (although I’d still want to apply Decompose Conditional (260)).
+
+// Decomposing the conditional like this is a good way to carry out this refactoring, but it only works if the dispatch on the parameter is the outer part of the function (or I can easily refactor it to make it so).
+// It’s also possible that the parameter is used in a much more tangled way, such as this alternative version of deliveryDate:
+function deliveryDate(anOrder, isRush) {
+  let result;
+  let deliveryTime;
+  if (anOrder.deliveryState === "MA" || anOrder.deliveryState === "CT")
+    deliveryTime = isRush? 1 : 2;
+  else if (anOrder.deliveryState === "NY" || anOrder.deliveryState === "NH") {
+    deliveryTime = 2;
+    if (anOrder.deliveryState === "NH" && !isRush)
+      deliveryTime = 3;
+  }
+  else if (isRush)
+    deliveryTime = 3;
+  else if (anOrder.deliveryState === "ME")
+    deliveryTime = 3;
+  else
+    deliveryTime = 4;
+  result = anOrder.placedOn.plusDays(2 + deliveryTime);
+  if (isRush) result = result.minusDays(1);
+  return result;
+}
+
+// In this case, teasing out isRush into a top-level dispatch conditional is likely more work than I fancy. So instead, I can layer functions over the deliveryDate:
+function rushDeliveryDate   (anOrder) {return deliveryDate(anOrder, true);}
+function regularDeliveryDate(anOrder) {return deliveryDate(anOrder, false);}
