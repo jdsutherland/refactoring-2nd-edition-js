@@ -4,21 +4,16 @@
 
 class ChargeCalculator {
   constructor (customer, usage, provider){
-    this._customer = customer;
-    this._usage = usage;
-    this._provider = provider;
   }
-  get baseCharge() {
-    return this._customer.baseRate * this._usage;
-  }
-  get charge() {
-    const baseCharge = this._customer.baseRate * this._usage;
-    return baseCharge + this._provider.connectionCharge;
+  get charge(customer, usage, provider) {
+    const baseCharge = customer.baseRate * usage;
+    return baseCharge + provider.connectionCharge;
   }
 }
 
 function charge(customer, usage, provider) {
-  return new ChargeCalculator(customer, usage, provider).charge;
+  return new ChargeCalculator(customer, usage, provider)
+                      .charge(customer, usage, provider);
 }
 
 monthCharge = charge(customer, usage, provider);
