@@ -23,8 +23,7 @@ There are two things that are particularly enticing about subclasses:
 
 ```javascript
 class Employee {
-  constructor(name, type){
-    this.validateType(type);
+  constructor(name){
     this._name = name;
   }
   toString() {return `${this.name} (${this.type})`;}
@@ -42,11 +41,11 @@ class Manager extends Employee {
   get type() {return "manager";}
 }
 
-function createEmployee(name, type) {
+function createEmployee(name) {
   switch (type) {
-    case "engineer": return new Engineer(name, type);
-    case "salesman": return new Salesman(name, type);
-    case "manager":  return new Manager (name, type);
+    case "engineer": return new Engineer(name);
+    case "salesman": return new Salesman(name);
+    case "manager":  return new Manager (name);
     default: throw new Error(`Employee cannot be of type ${type}`);
   }
 }
