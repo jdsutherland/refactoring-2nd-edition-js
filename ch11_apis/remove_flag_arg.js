@@ -40,3 +40,9 @@ function regularDeliveryDate(anOrder) {
     else deliveryTime = 4;
     return anOrder.placedOn.plusDays(2 + deliveryTime);
 }
+
+// A flag argument isn’t just the presence of a boolean value; it’s that the boolean is set with a literal rather than data.
+  // If all the callers of deliveryDate were like this:
+const isRush = determineIfRush(anOrder);
+aShipment.deliveryDate = deliveryDate(anOrder, isRush);
+// then I’d have no problem with deliveryDate’s signature (although I’d still want to apply Decompose Conditional (260)).
