@@ -16,59 +16,56 @@ class Bird {
   selectSpeciesDelegate(data) {
     switch(data.type) {
       case 'EuropeanSwallow':
-        return new EuropeanSwallowDelegate();
+        return new EuropeanSwallowDelegate(data, this);
       case 'AfricanSwallowDelegate':
-        return new AfricanSwallowDelegate(data);
+        return new AfricanSwallowDelegate(data, this);
       case 'NorwegianBlueParrotDelegate':
         return new NorwegianBlueParrotDelegate(data, this);
-      default: return null;
+    default: return new SpeciesDelegate(data, this);
     }
   }
 
   get name()    {return this._name;}
-  get plumage() {
-    if (this._speciesDelegate)
-      return this._speciesDelegate.plumage;
-    else
-      return this._plumage || "average";
-  }
-  get airSpeedVelocity() {
-    return this._speciesDelegate ? this._speciesDelegate.airSpeedVelocity : null;
-  }
+  get plumage() { return this._speciesDelegate.plumage; }
+  get airSpeedVelocity() { return this._speciesDelegate.airSpeedVelocity }
 }
 
-class EuropeanSwallowDelegate {
-  get airSpeedVelocity() {return 35;}
+class SpeciesDelegate {
+  constructor(data, bird) {
+    this._bird = bird;
+  }
   get plumage() {
     return this._bird._plumage || "average";
-  }
+  },
+  get airSpeedVelocity() {return null;}
 }
 
-class AfricanSwallowDelegate {
+class EuropeanSwallowDelegate extends SpeciesDelegate {
+  get airSpeedVelocity() {return 35;}
+}
+
+class AfricanSwallowDelegate extends SpeciesDelegate {
   constructor(data) {
+    super(data, bird)
     this._numberOfCoconuts = data.numberOfCoconuts;
   }
   get airSpeedVelocity() {
     return 40 - 2 * this._numberOfCoconuts;
   }
-  get plumage() {
-    return this._bird._plumage || "average";
-  }
 }
 
-class NorwegianBlueParrotDelegate {
+class NorwegianBlueParrotDelegate extends SpeciesDelegate {
   constructor(data) {
-    this._bird = bird;
+    super(data, bird)
     this._voltage = data.voltage;
     this._isNailed = data.isNailed;
   }
-
+  get airSpeedVelocity() {
+    return (this._isNailed) ? 0 : 10 + this._voltage / 10;
+  }
   get plumage() {
     if (this._voltage > 100) return "scorched";
     else return this._bird._plumage || "beautiful";
-  }
-  get airSpeedVelocity() {
-    return (this._isNailed) ? 0 : 10 + this._voltage / 10;
   }
 }
 
