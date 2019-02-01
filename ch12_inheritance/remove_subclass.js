@@ -8,6 +8,7 @@ class Person {
   get name()    {return this._name;}
   get genderCode() {return "X";}
   // snip
+  get isMale() {return this instanceof Male;}
 }
 
 class Male extends Person {
@@ -19,9 +20,7 @@ class Female extends Person {
 }
 
 // client
-const numberOfMales = people.filter(p => isMale(p)).length;
-
-function isMale(aPerson) {return aPerson instanceof Male;}
+const numberOfMales = people.filter(p => p.isMale).length;
 
 function createPerson(aRecord) {
   switch (aRecord.gender) {
