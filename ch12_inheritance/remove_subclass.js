@@ -2,11 +2,12 @@
 // When that time comes, it’s best to remove the subclass, replacing it with a field on its superclass.
 
 class Person {
-  constructor(name) {
+  constructor(name, genderCode) {
     this._name = name;
+    this._genderCode = genderCode || "X";
   }
   get name()    {return this._name;}
-  get genderCode() {return "X";}
+  get genderCode() {return this._genderCode;}
   // snip
   get isMale() {return this instanceof Male;}
 }
