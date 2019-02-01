@@ -24,7 +24,9 @@ class HeatingPlan {
 // I begin by stating the interface I want as an empty function.
 
 // altered example
-const low = aRoom.daysTempRange.low;
-const high = aRoom.daysTempRange.high;
-if (!aPlan.withinRange(low, high))
+const tempRange = aRoom.daysTempRange;
+const low = tempRange.low
+const high = tempRange.high
+const isWithinRange = aPlan.withinRange(low, high);
+if (!isWithinRange)
   alerts.push("room temperature went outside range");
