@@ -28,11 +28,15 @@ class CatalogItem {
 }
 
 // One of the things that scrolls need is regular cleaning. The code for that uses the catalog item and extends it with the data it needs for cleaning.
-class Scroll extends CatalogItem {
+class Scroll {
   constructor(id, title, tags, dateLastCleaned) {
-    super(id, title, tags);
+    this._catalogItem = new CatalogItem(id, title, tags);
     this._lastCleaned = dateLastCleaned;
   }
+  get id() {return this._catalogItem.id;}
+  get title() {return this._catalogItem.title;}
+  hasTag(aString) {return this._catalogItem.hasTag(aString);}
+
   needsCleaning(targetDate) {
     const threshold = this.hasTag("revered") ? 700 : 1500;
     return this.daysSinceLastCleaning(targetDate) > threshold ;
