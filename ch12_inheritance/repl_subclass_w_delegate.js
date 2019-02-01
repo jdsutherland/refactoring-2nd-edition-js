@@ -30,8 +30,15 @@ class PremiumBooking extends Booking {
   }
 }
 
-aBooking1 = new Booking(show,date);
-aBooking2 = new PremiumBooking(show, date, extras);
+function createBooking(show, date) {
+  return new Booking(show, date);
+}
+function createPremiumBooking(show, date, extras) {
+  return new PremiumBooking (show, date, extras);
+}
+
+aBooking1 = createBooking(show,date);
+aBooking2 = createPremiumBooking(show, date, extras);
 
 // There are quite a few changes that the premium booking makes to what it inherits from the superclass.
 // As is typical with this kind of programming-by-difference, in some cases the subclass overrides methods on the superclass, in others it adds new methods that are only relevant for the subclass.
