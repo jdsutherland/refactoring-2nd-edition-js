@@ -16,3 +16,21 @@ function availableVacation(anEmployee) {
 
 // When the parameter is present, determining its value is the caller’s responsibility; otherwise, that responsibility shifts to the function body.
 // My usual habit is to simplify life for callers, which implies moving responsibility to the function body—but only if that responsibility is appropriate there.
+
+// Example:
+class Order {
+  get finalPrice() {
+    const basePrice = this.quantity * this.itemPrice;
+    let discountLevel;
+    if (this.quantity > 100) discountLevel = 2;
+    else discountLevel = 1;
+    return this.discountedPrice(basePrice, discountLevel);
+  }
+
+  discountedPrice(basePrice, discountLevel) {
+    switch (discountLevel) {
+      case 1: return basePrice * 0.95;
+      case 2: return basePrice * 0.9;
+    }
+  }
+}
