@@ -21,8 +21,8 @@ class HeatingPlan {
 
 
 // caller
-if      (thePlan.targetTemperature > thermostat.currentTemperature) setToHeat();
-else if (thePlan.targetTemperature < thermostat.currentTemperature) setToCool();
+if      (thePlan.xxNEWtargetTemperature(thermostat.selectedTemperature) > thermostat.currentTemperature) setToHeat();
+else if (thePlan.targetTemperature(thermostat.selectedTemperature) < thermostat.currentTemperature) setToCool();
 else setOff();
 
 // As a user of such a system, I might be annoyed to have my desires overridden by the heating plan rules, but as a programmer I might be more concerned about how the targetTemperature function has a dependency on a global thermostat object.
