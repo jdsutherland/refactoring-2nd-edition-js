@@ -29,9 +29,9 @@ class CatalogItem {
 
 // One of the things that scrolls need is regular cleaning. The code for that uses the catalog item and extends it with the data it needs for cleaning.
 class Scroll {
-  constructor(id, title, tags, dateLastCleaned) {
+  constructor(id, dateLastCleaned, catalogID, catalog) {
     this._id = id;
-    this._catalogItem = new CatalogItem(id, title, tags);
+    this._catalogItem = catalog.get(catalogID);
     this._lastCleaned = dateLastCleaned;
   }
   get id() {return this._id;}
@@ -49,9 +49,9 @@ class Scroll {
 // Currently the scrolls are loaded as part of a load routine.
 const scrolls = aDocument
       .map(record => new Scroll(record.id,
-                                record.catalogData.title,
-                                record.catalogData.tags,
-                                LocalDate.parse(record.lastCleaned)));
+                                LocalDate.parse(record.lastCleaned),
+                                record.catalogData.id,
+                                catalog));
 ```
 
 This is an example of a common modeling error. There is a difference between the physical scroll and the catalog item. The scroll describing the treatment for the greyscale disease may have several copies, but be just one item in the catalog.
