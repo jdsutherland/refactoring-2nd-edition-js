@@ -9,7 +9,7 @@ class Person {
   get name()    {return this._name;}
   get genderCode() {return this._genderCode;}
   // snip
-  get isMale() {return this instanceof Male;}
+  get isMale() {return "M" === this._genderCode;}
 }
 
 class Male extends Person {
@@ -25,8 +25,8 @@ const numberOfMales = people.filter(p => p.isMale).length;
 
 function createPerson(aRecord) {
   switch (aRecord.gender) {
-    case 'M': return new Male  (aRecord.name);
-    case 'F': return new Female(aRecord.name);
+    case 'M': return new Person(aRecord.name, "M");
+    case 'F': return new Person(aRecord.name, "F");
     default:  return new Person(aRecord.name);
   }
 }
