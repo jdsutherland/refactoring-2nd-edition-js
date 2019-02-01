@@ -73,7 +73,7 @@ class Employee {
       + this.typeString.substr(1).toLowerCase();
   }
   toString() {
-    return `${this._name} (${this.capitalizedType})`;
+    return `${this._name} (${this.type.capitalizedName})`;
   }
 
   set type(arg) {this._type = Employee.createEmployeeType(arg);}
@@ -89,7 +89,12 @@ class Employee {
 }
 
 // prefer to leave empty to make relationship explicit
-class EmployeeType {}
+class EmployeeType {
+  get capitalizedName() {
+    return this.toString().charAt(0).toUpperCase()
+      + this.toString().substr(1).toLowerCase();
+  }
+}
 
 class Engineer extends EmployeeType {
   toString() {return "engineer";}
