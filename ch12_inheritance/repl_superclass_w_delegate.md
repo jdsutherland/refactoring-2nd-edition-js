@@ -30,10 +30,11 @@ class CatalogItem {
 // One of the things that scrolls need is regular cleaning. The code for that uses the catalog item and extends it with the data it needs for cleaning.
 class Scroll {
   constructor(id, title, tags, dateLastCleaned) {
+    this._id = id;
     this._catalogItem = new CatalogItem(id, title, tags);
     this._lastCleaned = dateLastCleaned;
   }
-  get id() {return this._catalogItem.id;}
+  get id() {return this._id;}
   get title() {return this._catalogItem.title;}
   hasTag(aString) {return this._catalogItem.hasTag(aString);}
 
@@ -45,6 +46,17 @@ class Scroll {
     return this._lastCleaned.until(targetDate, ChronoUnit.DAYS);
   }
 }
+// Currently the scrolls are loaded as part of a load routine.
+const scrolls = aDocument
+      .map(record => new Scroll(record.id,
+                                record.catalogData.title,
+                                record.catalogData.tags,
+                                LocalDate.parse(record.lastCleaned)));
 ```
+
 This is an example of a common modeling error. There is a difference between the physical scroll and the catalog item. The scroll describing the treatment for the greyscale disease may have several copies, but be just one item in the catalog.
+
+The refactoring shifts the role of the catalog item to that of a component of scroll; each scroll contains a unique instance of a catalog item. In many cases where I do this refactoring, this is enough. However, in this situation a better model is to link the greyscale catalog item to the six scrolls in the library that are copies of that writing. Doing this is, essentially, Change Value to Reference (256).
+
+There’s a problem that I have to fix, however, before I use Change Value to Reference (256). In the original inheritance structure, the scroll used the catalog item’s ID field to store its ID. But if I treat the catalog item as a reference, it needs to use that ID for the catalog item ID rather than the scroll ID. This means I need to create an ID field on scroll and use that instead of one in catalog item. It’s a sort-of move, sort-of split.
 
