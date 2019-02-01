@@ -2,14 +2,14 @@ function alertForMiscreant (people) {
   for (const p of people) {
     if (p === "Don") {
       setOffAlarms();
-      return "Don";
+      return
     }
     if (p === "John") {
       setOffAlarms();
-      return "John";
+      return
     }
   }
-  return "";
+  return
 }
 
 function findMiscreant (people) {
