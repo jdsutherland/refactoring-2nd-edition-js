@@ -19,23 +19,19 @@ class Female extends Person {
 }
 
 // client
-const numberOfMales = people.filter(p => p instanceof Male).length;
+const numberOfMales = people.filter(p => isMale(p)).length;
 
-// In that case, I find it better to use Extract Function (106) on the selection logic for which class to create, and make that the factory function.
+function isMale(aPerson) {return aPerson instanceof Male;}
+
 function createPerson(aRecord) {
-  let p;
   switch (aRecord.gender) {
-    case 'M': p = new Male(aRecord.name); break;
-    case 'F': p = new Female(aRecord.name); break;
-    default: p = new Person(aRecord.name);
+    case 'M': return new Male  (aRecord.name);
+    case 'F': return new Female(aRecord.name);
+    default:  return new Person(aRecord.name);
   }
-  return p;
 }
 
 function loadFromInput(data) {
-  const result = [];
-  data.forEach(aRecord => {
-    result.push(createPerson(aRecord));
-  });
-  return result;
+  return data.map(aRecord => createPerson(aRecord));
 }
+
