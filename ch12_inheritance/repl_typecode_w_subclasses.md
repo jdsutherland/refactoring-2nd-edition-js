@@ -32,6 +32,7 @@ class Employee {
     if (!["engineer", "manager", "salesman"].includes(arg))
       throw new Error(`Employee cannot be of type ${arg}`);
   }
-  toString() {return `${this._name} (${this._type})`;}
+  get type() {return this._type;}
+  toString() {return `${this.name} (${this.type})`;}
 }
 ```
