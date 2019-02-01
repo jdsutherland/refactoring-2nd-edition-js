@@ -11,8 +11,6 @@ if (aPlan.withinRange(aRoom.daysTempRange))
 // Consider a room monitoring system. It compares its daily temperature range with a range in a predefined heating plan.
 
 // caller
-const low = aRoom.daysTempRange.low;
-const high = aRoom.daysTempRange.high;
 if (!aPlan.xxNEWwithinRange(aRoom.daysTempRange))
   alerts.push("room temperature went outside range");
 
@@ -21,7 +19,8 @@ class HeatingPlan {
     return (bottom >= this._temperatureRange.low) && (top <= this._temperatureRange.high);
   }
   xxNEWwithinRange(aNumberRange) {
-    return this.withinRange(aNumberRange.low, aNumberRange.high);
+    return (aNumberRange.low >= this._temperatureRange.low) &&
+      (aNumberRange.high <= this._temperatureRange.high);
   }
 }
 
