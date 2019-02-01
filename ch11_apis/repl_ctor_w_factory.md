@@ -21,8 +21,8 @@ class Employee {
   }
 }
 
-candidate = new Employee(document.name, document.empType);
-const leadEngineer = new Employee(document.leadEngineer, 'E');
+candidate = createEmployee(document.name, document.empType);
+const leadEngineer = createEmployee(document.leadEngineer, 'E');
 ```
 
 ## 1. Create a Factory fn
