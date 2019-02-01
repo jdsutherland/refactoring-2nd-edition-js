@@ -24,3 +24,10 @@ class Employee {
 candidate = new Employee(document.name, document.empType);
 const leadEngineer = new Employee(document.leadEngineer, 'E');
 ```
+
+## 1. Create a Factory fn
+```javascript
+function createEmployee(name, typeCode) {
+  return new Employee(name, typeCode);
+}
+```
