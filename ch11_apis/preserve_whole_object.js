@@ -13,11 +13,16 @@ if (aPlan.withinRange(aRoom.daysTempRange))
 // caller
 const low = aRoom.daysTempRange.low;
 const high = aRoom.daysTempRange.high;
-if (!aPlan.withinRange(low, high))
+if (!aPlan.xxNEWwithinRange(aRoom.daysTempRange))
   alerts.push("room temperature went outside range");
 
 class HeatingPlan {
   withinRange(bottom, top) {
     return (bottom >= this._temperatureRange.low) && (top <= this._temperatureRange.high);
   }
+  xxNEWwithinRange(aNumberRange) {
+    return this.withinRange(aNumberRange.low, aNumberRange.high);
+  }
 }
+
+// I begin by stating the interface I want as an empty function.
